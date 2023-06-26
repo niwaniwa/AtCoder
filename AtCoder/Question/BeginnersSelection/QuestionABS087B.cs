@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace AtCorder.Question.BeginnersSelection;
+namespace AtCoder.Question.BeginnersSelection;
 
 
 // https://atcoder.jp/contests/abs/tasks/abc087_b

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace AtCorder.Question.BeginnersSelection;
+namespace AtCoder.Question.BeginnersSelection;
 
 
 // Shift only

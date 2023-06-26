@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtCorder", "AtCorder\AtCorder.csproj", "{58083E9F-4002-495D-AA97-4F1D130666F4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtCoder", "AtCoder\AtCoder.csproj", "{58083E9F-4002-495D-AA97-4F1D130666F4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

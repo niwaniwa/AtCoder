@@ -1,4 +1,4 @@
-﻿namespace AtCorder.Question;
+﻿namespace AtCoder.Question;
 
 public interface IQuestion
 {

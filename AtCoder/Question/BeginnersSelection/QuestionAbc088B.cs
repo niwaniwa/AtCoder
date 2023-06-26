@@ -1,4 +1,4 @@
-﻿namespace AtCorder.Question.BeginnersSelection;
+﻿namespace AtCoder.Question.BeginnersSelection;
 
 public class QuestionAbc088B : IQuestion
 {
@@ -12,25 +12,29 @@ public class QuestionAbc088B : IQuestion
         var alice = 0;
         var bob = 0;
 
-        var pointsRaw = Console.ReadLine().Split(" ");
+        var pointsRaw = Console.ReadLine()!.Split(" ");
 
-        var hoge = pointsRaw.Select(str =>
+        var array = pointsRaw.Select(str =>
         {
             int.TryParse(str, out var point);
             return point;
-        });
+        }).ToList();
+
+        if (array.Count != count)
+        {
+            Console.WriteLine("Error array is null."); 
+            return;
+        }
 
         for (int i = 0; i < count && i < 100; i++)
         {
-
+            var max = array.Max();
             if (i % 2 == 0)
-                alice += hoge.Max();
+                alice += max;
             else
-                bob += hoge.Max();
+                bob += max;
 
-            hoge = hoge.Where(v => v != hoge.Max());
-            
-            Console.WriteLine($"{i}:alice {alice}, bob {bob}");
+            array.Remove(max);
         }
         
         Console.WriteLine(Math.Abs(alice - bob));

@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace AtCorder.Question.BeginnersSelection;
+namespace AtCoder.Question.BeginnersSelection;
 
 public class QuestionAbc083B : IQuestion
 {

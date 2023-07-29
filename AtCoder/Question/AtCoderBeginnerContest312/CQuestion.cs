@@ -14,87 +14,36 @@ public class CQuestion : IQuestion
         int.TryParse(input[0], out var n);
         int.TryParse(input[1], out var m);
 
-        var urite = new int[n];
-        var kaite = new int[m];
+        // sort
+        var urite = Console.ReadLine().Split(" ").Select(int.Parse).OrderBy(x => x).ToArray();
+        var kaite = Console.ReadLine().Split(" ").Select(int.Parse).OrderByDescending(x => x).ToArray();
 
-        var urite_input = Console.ReadLine().Split(" ");
-        var kaite_input = Console.ReadLine().Split(" ");
-        
-        for (int i = 0; i < n; i++)
+        // 解説 https://atcoder.jp/contests/abc312/editorial/6856
+        int left = 0, right = (int)1e9 + 1;
+        while (right - left > 1)
         {
-            int.TryParse(urite_input[i], out var o);
-            urite[i] = o;
-            // urite = sort(urite);
-        }
-        
-        for (int i = 0; i < m; i++)
-        {
-            int.TryParse(kaite_input[i], out var o);
-            kaite[i] = o;
-            // kaite = sort(kaite);
-        }
-        
-        // urite = Sort(urite);
-        // kaite = Sort(kaite);
-
-        var maxKakaku = 0;
-        var maxKaite = 0;
-        var kaiteMax = 0;
-        
-        
-        for (int i = 0; i < n; i++)
-        {
-            var count = 0;
-            for (int j = 0; j < m; j++)
+            int mid = (left + right) / 2;
+            // あるxで　f(x)　≥　g(x) となるなら、x　≤　y となる任意のyで　f(y)　≥　f(x)　≥　g(x)　≥g　(y)を満たす
+            // 中央の値において買い手より売り手が多い時、単調増加なので、この価格以上はmidより買い手が少ない
+            // なので二部探索において、上限をmidにする
+            if (Check(mid, urite, kaite))
             {
-                
-                if (urite[i] < kaite[j])
-                {
-                    count++;
-                    if (j == m - 1)
-                    {
-                        if (maxKaite <= count)
-                        {
-                            maxKaite = count;
-                            if (maxKakaku <= urite[i])
-                            {
-                                maxKakaku = urite[i];
-                            }
-                        }
-                    }
-                }
-
-                if (kaiteMax < kaite[j])
-                {
-                    kaiteMax = kaite[j];
-                }
-                
+                right = mid;
+            }
+            else
+            {
+                left = mid;
             }
         }
 
-        if (maxKakaku == 0)
-        {
-            maxKakaku = kaiteMax + 1;
-        }
-    
-        Console.WriteLine($"{maxKakaku}");
-        
+        Console.WriteLine(right);
     }
 
-    public static int[] Sort(int[] input)
+    private static bool Check(int x, int[] urite, int[] kaite)
     {
-        var result = input;
-        for (int i = 0; i < input.Length; i++)
-        {
-            for (int j = i + 1; j < input.Length; j++)
-            {
-                if (result[i] > result[j])
-                {
-                    (result[i], result[j]) = (result[j], result[i]);
-                }
-            }
-        }
-
-        return result;
+        int f = urite.Count(a => a <= x);
+        int g = kaite.Count(b => b >= x);
+        return f >= g;
+        
     }
 }
